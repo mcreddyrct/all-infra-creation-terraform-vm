@@ -5,6 +5,7 @@ sudo yum install telnet nc net-tools -y
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 sudo systemctl start amazon-ssm-agent
 sudo yum install wget -y
+
 sudo cd /opt
 sudo wget -O nexus3.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
 sudo tar -xvf nexus3.tar.gz
