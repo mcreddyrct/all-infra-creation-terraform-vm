@@ -8,14 +8,10 @@ sudo sed -i 's/  enabled: false/  enabled: true/g' /etc/filebeat/filebeat.yml
 sudo systemctl enable filebeat.service
 sudo systemctl start filebeat.service
 sudo systemctl restart filebeat.service
-sudo apt install -y gpg
-sudo curl https://s3.amazonaws.com/amazon-ssm-eu-west-1/latest/debian_amd64/amazon-ssm-agent.deb.sig -o /tmp/amazon-ssm-agent.deb.sig
-sudo gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 9C6D6DDEA2612D3F
-gpg --verify /tmp/amazon-ssm-agent.deb.sig /tmp/amazon-ssm-agent.deb
-sudo curl https://s3.amazonaws.com/amazon-ssm-eu-west-1/latest/debian_amd64/amazon-ssm-agent.deb -o /tmp/amazon-ssm-agent.deb
-sudo dpkg -i /tmp/amazon-ssm-agent.deb
-sudo systemctl start amazon-ssm-agent
-sudo systemctl enable amazon-ssm-agent
+sudo apt-get update -y
+sudo snap install amazon-ssm-agent --classic
+sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
+sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo wget https://github.com/prometheus/node_exporter/releases/download/v1.4.0-rc.0/node_exporter-1.4.0-rc.0.linux-amd64.tar.gz
 sudo tar -zvxf node_exporter-1.4.0-rc.0.linux-amd64.tar.gz
 cd node_exporter-1.4.0-rc.0.linux-amd64/
