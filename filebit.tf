@@ -34,6 +34,15 @@ resource "aws_security_group" "Fb-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
+    description = "admin"
+    from_port   = 5400
+    to_port     = 5400
+    protocol    = "tcp"
+    /* security_groups = ["${aws_security_group.ek-sg.id}"] */
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     description     = "admin"
     from_port       = 8080
     to_port         = 8080
@@ -47,6 +56,14 @@ resource "aws_security_group" "Fb-sg" {
     to_port         = 9100
     protocol        = "tcp"
     security_groups = ["${aws_security_group.siva-alb-sg.id}"]
+    /* cidr_blocks = ["0.0.0.0/0"] */
+  }
+  ingress {
+    description     = "admin"
+    from_port       = 9100
+    to_port         = 9100
+    protocol        = "tcp"
+    security_groups = ["${aws_security_group.grafana.id}"]
     /* cidr_blocks = ["0.0.0.0/0"] */
   }
   egress {
@@ -69,7 +86,7 @@ resource "aws_security_group" "Fb-sg" {
 resource "aws_instance" "Fb" {
   ami           = var.ami_ubuntu
   instance_type = var.type_ubuntu
-  subnet_id     = aws_subnet.privatesubnet[2].id
+  subnet_id     = aws_subnet.privatesubnet[0].id
   # availability_zone = data.aws_availability_zones.available.names[0]
   key_name               = aws_key_pair.deployer.id
   vpc_security_group_ids = [aws_security_group.Fb-sg.id]

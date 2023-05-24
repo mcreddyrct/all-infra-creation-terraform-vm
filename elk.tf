@@ -42,6 +42,14 @@ resource "aws_security_group" "ek-sg" {
     security_groups = ["${aws_security_group.siva-alb-sg.id}"]
     /* cidr_blocks = ["0.0.0.0/0"] */
   }
+   ingress {
+    description     = "admin"
+    from_port       = 9200
+    to_port         = 9200
+    protocol        = "tcp"
+    security_groups = ["${aws_security_group.Fb-sg.id}"]
+    /* cidr_blocks = ["0.0.0.0/0"] */
+  }
   ingress {
     description     = "admin"
     from_port       = 9200
@@ -72,7 +80,7 @@ resource "aws_security_group" "ek-sg" {
 resource "aws_instance" "elasticsearch-kibana" {
   ami           = var.ami_ubuntu
   instance_type = var.type_ubuntu
-  subnet_id     = aws_subnet.privatesubnet[2].id
+  subnet_id     = aws_subnet.privatesubnet[0].id
   # availability_zone = data.aws_availability_zones.available.names[0]
  key_name               = aws_key_pair.deployer.id
   vpc_security_group_ids = [aws_security_group.ek-sg.id]

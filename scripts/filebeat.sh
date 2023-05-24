@@ -1,9 +1,10 @@
 #!/bin/bash
+sudo sudo apt install openjdk-11-jre -y
 sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 sudo apt-get install apt-transport-https
 sudo echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
-sudo apt-get update
-sudo apt-get install filebeat
+sudo apt-get update -y
+sudo apt-get install filebeat -y
 sudo sed -i 's/  enabled: false/  enabled: true/g' /etc/filebeat/filebeat.yml
 sudo systemctl enable filebeat.service
 sudo systemctl start filebeat.service

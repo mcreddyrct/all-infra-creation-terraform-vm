@@ -56,7 +56,7 @@ resource "aws_security_group" "nexus" {
 resource "aws_instance" "nexus" {
   ami                    = var.ami
   instance_type          = var.type_small
-  subnet_id              = aws_subnet.privatesubnet[2].id
+  subnet_id              = aws_subnet.privatesubnet[0].id
   vpc_security_group_ids = [aws_security_group.nexus.id]
    key_name               = aws_key_pair.deployer.id
   #user_data              = data.template_file.nexususer.rendered

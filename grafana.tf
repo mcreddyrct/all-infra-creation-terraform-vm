@@ -70,7 +70,7 @@ resource "aws_security_group" "grafana" {
 resource "aws_instance" "grafana" {
   ami                    = var.ami
   instance_type          = var.type
-  subnet_id              = aws_subnet.privatesubnet[2].id
+  subnet_id              = aws_subnet.privatesubnet[1].id
   vpc_security_group_ids = [aws_security_group.grafana.id]
    key_name               = aws_key_pair.deployer.id
   #user_data              = data.template_file.grafanauser.rendered

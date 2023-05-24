@@ -9,7 +9,7 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["45.249.77.103/32"]
+    cidr_blocks = ["43.225.22.26/32"]
   }
   ingress {
     description = "this is inbound rule"

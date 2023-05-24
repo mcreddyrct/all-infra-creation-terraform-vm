@@ -36,7 +36,7 @@ resource "aws_lb" "siva-test-alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.siva-alb-sg.id]
-  subnets            = ["${aws_subnet.publicsubnet[1].id}", "${aws_subnet.publicsubnet[2].id}"]
+  subnets            = ["${aws_subnet.publicsubnet[0].id}","${aws_subnet.publicsubnet[1].id}", "${aws_subnet.publicsubnet[2].id}"]
 
   #   enable_deletion_protection = true
 

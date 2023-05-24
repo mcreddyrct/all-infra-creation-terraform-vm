@@ -72,7 +72,7 @@ resource "aws_security_group" "apache" {
 resource "aws_instance" "apache" {
   ami                    = var.ami_ubuntu
   instance_type          = var.type_ubuntu
-  subnet_id              = aws_subnet.privatesubnet[2].id
+  subnet_id              = aws_subnet.privatesubnet[1].id
   vpc_security_group_ids = [aws_security_group.apache.id]
   key_name               = aws_key_pair.deployer.id
   iam_instance_profile   = aws_iam_instance_profile.ssm_agent_instance_profile.name
