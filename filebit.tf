@@ -12,6 +12,14 @@ resource "aws_security_group" "Fb-sg" {
     cidr_blocks = ["45.249.77.103/32"]
   }
   ingress {
+    description = "admin"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    #cidr_blocks = ["45.249.77.103/32"]
+    security_groups = ["${aws_security_group.jenkins.id}"]
+  }
+  ingress {
     description     = "admin"
     from_port       = 22
     to_port         = 22

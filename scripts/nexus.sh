@@ -1,12 +1,7 @@
-  #!/bin/bash
-sudo yum install java-1.8.0 -y
-sudo yum update -y 
-sudo yum install telnet nc net-tools -y 
-sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
-sudo systemctl start amazon-ssm-agent
+#!/bin/bash
 sudo yum install wget -y
-
 sudo cd /opt
+sudo yum install java-1.8.0 -y
 sudo wget -O nexus3.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
 sudo tar -xvf nexus3.tar.gz
 sudo mv nexus-3* nexus
@@ -38,3 +33,7 @@ sudo ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
 sudo chkconfig --add nexus
 sudo chkconfig --levels 345 nexus on
 sudo service nexus start
+sudo yum update -y 
+sudo  yum install telnet nc net-tools -y 
+sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+systemctl start amazon-ssm-agent

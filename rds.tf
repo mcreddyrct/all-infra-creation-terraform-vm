@@ -1,4 +1,4 @@
-resource "aws_security_group" "rds-sg" {
+resource "aws_security_group" "siva-rds-sg" {
   name        = "alb-sg"
   description = "this is using for securitygroup"
   vpc_id      = aws_vpc.stage-vpc.id
@@ -32,7 +32,7 @@ resource "aws_db_instance" "default" {
   password               = "sriram2662"
   parameter_group_name   = "default.mysql5.7"
   db_subnet_group_name   = aws_db_subnet_group.db-subnetgroup.name
-  vpc_security_group_ids = ["${aws_security_group.rds-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.siva-rds-sg.id}"]
   skip_final_snapshot    = true
   tags = {
     "name" = "stage-rds"
