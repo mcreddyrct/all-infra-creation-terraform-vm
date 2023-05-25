@@ -1,6 +1,6 @@
 /* terraform {
   backend "s3" {
-    bucket         = "devops-remote-tfstatefile"
+    bucket         = "devops-remote-tfstatefile-rct"
     key            = "terraform.tfstate"
     region         = "us-west-2"
     dynamodb_table = "remote-tf-state-file"
