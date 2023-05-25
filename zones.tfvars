@@ -5,8 +5,8 @@ datasubnet    = ["10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24"]
 cidr          = "10.0.0.0/16"
 ami           = "ami-0126086c4e272d3c9"
 ami_ubuntu    = "ami-0df7a207adb9748c7"
-type_ubuntu   = "c4.2xlarge"
+type_ubuntu   = "c5.xlarge"
 region        = "ap-southeast-1"
-type          = "t2.2xlarge"
-type_small    = "t2.2xlarge"
+type          = "t2.xlarge"
+type_small    = "t2.xlarge"
 
