@@ -83,10 +83,10 @@ resource "aws_security_group" "Fb-sg" {
   }
 
   tags = {
-    Name = "filebit-sg"
+    Name = "filebeat-sg"
   }
 }
-/* data "template_file" "filebituser" {
+/* data "template_file" "filebeatuser" {
   template = file("fb-user-data.sh")
 
 } */
@@ -98,7 +98,7 @@ resource "aws_instance" "Fb" {
   # availability_zone = data.aws_availability_zones.available.names[0]
   key_name               = aws_key_pair.deployer.id
   vpc_security_group_ids = [aws_security_group.Fb-sg.id]
-  #user_data              = data.template_file.filebituser.rendered
+  #user_data              = data.template_file.filebeatuser.rendered
    iam_instance_profile   = aws_iam_instance_profile.ssm_agent_instance_profile.name
   user_data = file("scripts/filebeat.sh")
   tags = {
@@ -109,15 +109,15 @@ resource "aws_instance" "Fb" {
 
 
 # alb target-group
-resource "aws_lb_target_group" "siva-tg-filebit" {
-  name     = "filebit-tg"
+resource "aws_lb_target_group" "siva-tg-filebeat" {
+  name     = "filebeat-tg"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = aws_vpc.stage-vpc.id
 }
 
-resource "aws_lb_target_group_attachment" "siva-tg-attachment-filebit" {
-  target_group_arn = aws_lb_target_group.siva-tg-filebit.arn
+resource "aws_lb_target_group_attachment" "siva-tg-attachment-filebeat" {
+  target_group_arn = aws_lb_target_group.siva-tg-filebeat.arn
   target_id        = aws_instance.Fb.id
   port             = 8080
 }
@@ -125,18 +125,18 @@ resource "aws_lb_target_group_attachment" "siva-tg-attachment-filebit" {
 
 
 # alb-listner_rule
-resource "aws_lb_listener_rule" "siva-filebit-hostbased" {
+resource "aws_lb_listener_rule" "siva-filebeat-hostbased" {
   listener_arn = aws_lb_listener.siva-alb-listener.arn
   #   priority     = 98
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.siva-tg-filebit.arn
+    target_group_arn = aws_lb_target_group.siva-tg-filebeat.arn
   }
 
   condition {
     host_header {
-      values = ["filebit.siva.quest"]
+      values = ["filebeat.siva.quest"]
     }
   }
 }
